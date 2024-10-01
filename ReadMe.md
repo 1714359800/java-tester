@@ -1,12 +1,15 @@
 1. **Environment Setup**
+
    - Install Python 3.11, Maven 3.9.6, Java 8, Postgres 16, and configure the corresponding environment.
 
    - Install Python library dependencies
+
      ```
      pip install -r requirements.txt
      ```
 
    - Set Prefect parameters
+
      ```
      prefect config set PREFECT_API_DATABASE_CONNECTION_URL="postgresql+asyncpg://postgres:yourPassWord@localhost:5432/prefect"	
      prefect config set PREFECT_API_URL="http://127.0.0.1:4200/api"
@@ -14,8 +17,9 @@
      ```
 
 2. **Usage**
+
    - The Config in the file ./utils/constants.py defines the execution path for unit tests at runtime, for example:
-     
+
      ```
      maven_project: List[str] = [
              f"{PROJECT_ROOT}/project/TestJavaCode"
@@ -25,19 +29,23 @@
      ```
 
      
-     
-   -  This path should be a Maven project containing a pom.xml file, which should include dependencies for dataset compilation and testing (such as JUnit, Clover, etc.).
-     
+
+   -  This path should be a Maven project containing a `pom.xml` file, which should include dependencies for dataset compilation and testing (such as JUnit, Clover, etc.).
+
    - Start the Prefect backend service
+
      ```
      prefect server start
      ```
-   
+
    - Modify the parameters in main.py and run main.py
+
      ```
      python main.py
      ```
+
      Parameter details are as follows:
+
      | Parameter           | Type         | Description                                                  |
      | ------------------- | ------------ | ------------------------------------------------------------ |
      | mode                | CoverageMode | Metric for running unit tests in the system, divided into branch coverage and line coverage. |
@@ -53,13 +61,19 @@
      | dataset_name        | str          | Name of the dataset for generating unit test tasks, same as the file name. |
      | dataset_size        | int          | Number of unit test generation tasks to stop after.          |
      | dataset_start_index | int          | Start generating tasks from which data in the dataset.       |
-   
+
 3. **Custom Dataset**
-   - Run \ui\main.py, call the upload_file method using an HTTP tool, and upload a zip file. The zip file should only contain the \src\main\java code directory:
-     - src
-     |_ main
-        |_ java
-     The processed dataset will be saved in \dataset\datasetname_processed.zip.
+
+   - Run` \ui\main.py`, call the `upload_file` method using an HTTP tool, and upload a zip file. The zip file should only contain the `\src\main\java` code directory:
+
+     `-src`
+
+     `|_ main`
+
+     ​	`|_ java`
+
+     The processed dataset will be saved in `\dataset\datasetname_processed.zip`.
 
 4. **Others**
+
    - Code and other files generated in the TestART experiment: [Link to files](https://pan.baidu.com/s/1S0KSdtdW7R6unYnoTEe5XA?pwd=tfn7)
